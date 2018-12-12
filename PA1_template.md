@@ -24,7 +24,7 @@ steps$interval <- as.factor(paste(substr(intervals, 1,2), ":", substr(intervals,
 ## We aggregate the data on a daily basis to get to the number of steps taken per day
 stepsPerDay <- aggregate(list(steps = steps$steps), list(date = steps$date), sum, na.rm = TRUE)
 ## We create a histogram of the steps per day
-barplot(height = stepsPerDay$steps, names.arg = format(stepsPerDay$date, "%m-%d"), cex.names = 0.75, col = "skyblue2", main = "Number of steps taken per day by anonymous person in October & November 2012", xlab = "Days in October and November 2012", ylab = "Number of steps taken per day")
+hist(x = stepsPerDay$steps, breaks = 20, col = "skyblue2", main = "Histogram of daily number of steps taken by anonymous person in October & November 2012", xlab = "Number of steps buckets", ylim = c(0,15), xlim = c(0, 25000))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -116,7 +116,7 @@ stepsImputed <- mutate(stepsImputed, steps.x = ifelse(is.na(steps.x), steps.y, s
 stepsImputedPerDay <- aggregate(list(steps = stepsImputed$steps.x), list(date = stepsImputed$date), sum)
 
 ## Then we create a histogram of the steps per day for this imputed steps data frame.
-barplot(height = stepsImputedPerDay$steps, names.arg = format(stepsImputedPerDay$date, "%m-%d"), cex.names = 0.75, col = "skyblue2", main = "Number of steps taken per day by anonymous person in October & November 2012", xlab = "Days in October and November 2012", ylab = "Number of steps taken per day (missing values imputed)")
+hist(x = stepsImputedPerDay$steps, breaks = 20, col = "skyblue2", main = "Histogram of daily number of steps taken by anonymous person in October & November 2012", xlab = "Number of steps buckets (missing values imputed)", ylim = c(0,20), xlim = c(0, 25000))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
